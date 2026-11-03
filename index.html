@@ -525,6 +525,32 @@ html[data-lang="zh"] .mech-h h4{letter-spacing:0}
   .mech-panel:first-child{grid-column:auto}
 }
 
+/* positioning strip (after the hero) */
+.positioning{padding:54px 0 44px;border-top:1px solid var(--rule)}
+.pos-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+.pos-kicker{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.pos-lead{font-family:var(--sans);font-size:12.5px;color:var(--muted)}
+.pos-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1.2fr;align-items:stretch;gap:10px}
+.pos-node{border:1px solid var(--rule-2);background:#fff;padding:12px 14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0;border-radius:2px}
+.pos-node .pn-axis{font-family:var(--sans);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.pos-node .pn-title{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink)}
+.pos-node:hover{background:#f6f9fb}
+.pos-node.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:#f1f6fa}
+.pos-node.active .pn-title{color:var(--accent)}
+.pos-arrow{align-self:center;font-family:var(--sans);font-size:15px;color:var(--rule-2)}
+.pos-detail{margin-top:14px;border:1px solid var(--rule);border-left:2px solid var(--accent);background:#fff;padding:14px 16px}
+.pos-pane p{margin:0;font-family:var(--sans);font-size:13px;line-height:1.6;color:var(--ink-2)}
+.pos-pane .pos-lack{margin-top:6px;color:var(--muted);font-size:12px}
+html[data-lang="zh"] .pos-pane p{line-height:1.75}
+html[data-lang="zh"] .pos-node .pn-axis{letter-spacing:.06em}
+@media (max-width:1000px){
+  .pos-flow{grid-template-columns:1fr 1fr}
+  .pos-arrow{display:none}
+}
+@media (max-width:620px){
+  .pos-flow{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body><svg aria-hidden="true" class="icon-sprite" focusable="false"><defs>
@@ -583,6 +609,53 @@ html[data-lang="zh"] .mech-h h4{letter-spacing:0}
 <div class="stat"><span class="stat-v">5,000</span><span class="stat-l" data-zh="街景点位">street-view locations</span><span class="stat-d" data-zh="全市空间样本">city-wide spatial sample</span></div>
 <div class="stat"><span class="stat-v">668</span><span class="stat-l" data-zh="机制子样本">mechanism subsample</span><span class="stat-d" data-zh="三个架构，六种视觉条件">three architectures, six visual conditions</span></div>
 <div class="stat"><span class="stat-v">3</span><span class="stat-l" data-zh="开放权重架构">open-weight architectures</span><span class="stat-d">Qwen3-VL-8B · LLaVA-1.6-7B · InternVL2-8B</span></div>
+</div>
+</div>
+</section>
+<section class="positioning" id="positioning">
+<div class="wrap">
+<div class="pos-head reveal">
+<span class="pos-kicker" data-zh="本研究的位置">Where this study sits</span>
+<span class="pos-lead" data-zh="已有工作集中在三格；第四格是本研究的入口。">Work clusters in three quadrants; the fourth is this study's entry.</span>
+</div>
+<div aria-label="Research positioning" class="pos-flow reveal" role="tablist">
+<button aria-selected="false" class="pos-node" data-pos="0" role="tab">
+<span class="pn-axis" data-zh="单图 · 输出">Single image · output</span>
+<span class="pn-title" data-zh="省算力">Efficiency</span>
+</button>
+<span aria-hidden="true" class="pos-arrow">→</span>
+<button aria-selected="false" class="pos-node" data-pos="1" role="tab">
+<span class="pn-axis" data-zh="单图 · 内部">Single image · internal</span>
+<span class="pn-title" data-zh="归因">Attribution</span>
+</button>
+<span aria-hidden="true" class="pos-arrow">→</span>
+<button aria-selected="false" class="pos-node" data-pos="2" role="tab">
+<span class="pn-axis" data-zh="城市 · 输出">City · output</span>
+<span class="pn-title" data-zh="制图与审计">Mapping and audit</span>
+</button>
+<span aria-hidden="true" class="pos-arrow">→</span>
+<button aria-selected="true" class="pos-node active" data-pos="3" role="tab">
+<span class="pn-axis" data-zh="城市 · 内部">City · internal</span>
+<span class="pn-title" data-zh="本研究">This study</span>
+</button>
+</div>
+<div class="pos-detail reveal">
+<div class="pos-pane" data-pane="0" hidden="">
+<p data-zh="token 剪枝、自适应分辨率与序列裁剪，在单张图像上减少计算。">Token pruning, adaptive resolution and sequence trimming cut computation per image.</p>
+<p class="pos-lack" data-zh="缺：停止信号来自任务奖励或注意力；没有检验证据是否驱动答案。">Missing: the stop signal comes from task reward or attention; nothing checks whether the evidence drives the answer.</p>
+</div>
+<div class="pos-pane" data-pane="1" hidden="">
+<p data-zh="logit lens、tuned lens 与区域归因读取模型内部状态。">Logit lens, tuned lens and region attribution read the model's internal state.</p>
+<p class="pos-lack" data-zh="缺：停在实例级与事后解释；没有跨地点的场，也没有用于分配计算。">Missing: instance-level and post hoc; no field across locations, and no use in allocating computation.</p>
+</div>
+<div class="pos-pane" data-pane="2" hidden="">
+<p data-zh="VLM 土地利用制图、街景质量审计与参考层不一致审计都在输出层工作。">VLM land-use mapping, street-view quality audit and reference-layer disagreement audit work on outputs.</p>
+<p class="pos-lack" data-zh="缺：只看输出与参考层；模型为什么这样标，不可见。">Missing: outputs and reference layers only; why the model assigns a label stays invisible.</p>
+</div>
+<div class="pos-pane" data-pane="3">
+<p data-zh="空缺：缺信号、缺审计、缺尺度。">Empty: no signal, no audit, no scale.</p>
+<p class="pos-lack" data-zh="本研究：把源归因做成路网场。下一步：SAAO 用这个场分配观察（计划）。">This study: source attribution as a road-network field. Next: SAAO uses the field to allocate observation (planned).</p>
+</div>
 </div>
 </div>
 </section>
@@ -2625,6 +2698,23 @@ window.MIRAGE_DATA = {"meta":{"title":"A source-attribution audit of vision-lang
     try { stored = localStorage.getItem("mirage-lang"); } catch (e) {}
     if (q === "zh" || q === "en") setLang(q);
     else if (stored === "zh") setLang("zh");
+  })();
+
+  /* ------------------------------------------------------------ positioning strip */
+  (function positioning() {
+    var nodes = $$(".pos-node"), panes = $$(".pos-pane");
+    if (!nodes.length) return;
+    nodes.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var i = +b.getAttribute("data-pos");
+        nodes.forEach(function (x) {
+          var on = x === b;
+          x.classList.toggle("active", on);
+          x.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        panes.forEach(function (p) { p.hidden = +p.getAttribute("data-pane") !== i; });
+      });
+    });
   })();
 
   /* ------------------------------------------------------------ first paint */
